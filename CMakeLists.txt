@@ -4,6 +4,4 @@ project(MatchSimu)
 set(CMAKE_C_STANDARD 17)
 
 add_executable(MatchSimu main.c
-        utils.h
-        simulation.c
         simulation.h)
