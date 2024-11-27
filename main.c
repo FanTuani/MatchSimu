@@ -34,4 +34,10 @@ void input(double ability[], int *n) {
     scanf("%lf", &ability[1]);
     printf("模拟比赛的场次: ");
     scanf("%d", n);
+    if(ability[0] + ability[1] <= 0 || n <= 0) {
+        printf("INVALID INPUT");
+        getchar();
+        getchar();
+        exit(0);
+    }
 }

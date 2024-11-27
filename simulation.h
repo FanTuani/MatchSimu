@@ -6,20 +6,16 @@
 #include <time.h>
 
 int simulateOnce(const double ability[]) {
-    int score1 = 0, score2 = 0;
+    int score[2] = {0, 0};
     int first = 0;
-    while (score1 < 15 && score2 < 15) {
+    while (score[0] < 15 && score[1] < 15) {
         if ((rand() / (double)RAND_MAX) < ability[first]) {
-            if (first == 0) {
-                score1++;
-            } else {
-                score2++;
-            }
+            score[first]++;
         } else {
             first ^= 1;
         }
     }
-    return (score1 == 15) ? 1 : 0;
+    return (score[0] == 15) ? 1 : 0;
 }
 
 int simulate(const double ability[], int n) {
