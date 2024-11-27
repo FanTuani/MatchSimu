@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.27)
 project(MatchSimu)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 17)
 
-add_executable(MatchSimu main.cpp)
+add_executable(MatchSimu main.c
+        utils.h
+        simulation.c
+        simulation.h)
