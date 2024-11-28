@@ -7,7 +7,7 @@ int hisN[N], hisWin1[N], hisCnt = 1;
 
 void process();
 
-void input(double ability[], int *n);
+int input(double ability[], int *n);
 
 void printHistory();
 
@@ -41,13 +41,16 @@ void process() {
     printf("程序运行需要 A 和 B 的能力值（以 0 和 1 之间的小数表示）\n");
     double ability[2];
     int n;
-    input(ability, &n);
-    int win1 = simulate(ability, n);
-    int win2 = n - win1;
-    printf("选手 A 获胜 %d 场比赛，占比 %.2lf\n", win1, win1 * 1.0 / n);
-    printf("选手 B 获胜 %d 场比赛，占比 %.2lf\n", win2, win2 * 1.0 / n);
-    hisN[hisCnt] = n, hisAbility[hisCnt][0] = ability[0], hisAbility[hisCnt][1] = ability[1];
-    hisWin1[hisCnt++] = win1;
+    if (input(ability, &n)) {
+        int win1 = simulate(ability, n);
+        int win2 = n - win1;
+        printf("选手 A 获胜 %d 场比赛，占比 %.2lf\n", win1, win1 * 1.0 / n);
+        printf("选手 B 获胜 %d 场比赛，占比 %.2lf\n", win2, win2 * 1.0 / n);
+        hisN[hisCnt] = n, hisAbility[hisCnt][0] = ability[0], hisAbility[hisCnt][1] = ability[1];
+        hisWin1[hisCnt++] = win1;
+    } else {
+        printf("INVALID INPUT");
+    }
     getchar();
     getchar();
 }
@@ -67,17 +70,15 @@ void printHistory() {
     getchar();
 }
 
-void input(double ability[], int *n) {
+int input(double ability[], int *n) {
     printf("请输入选手 A 的能力值 (0-1): ");
     scanf("%lf", &ability[0]);
     printf("请输入选手 B 的能力值 (0-1): ");
     scanf("%lf", &ability[1]);
     printf("模拟比赛的场次: ");
     scanf("%d", n);
-    if (ability[0] + ability[1] <= 0 || n <= 0) {
-        printf("INVALID INPUT");
-        getchar();
-        getchar();
-        exit(0);
+    if (ability[0] + ability[1] <= 0 || n <= 0 || ability[0] > 1 || ability[1] > 1) {
+        return 0;
     }
+    return 1;
 }
